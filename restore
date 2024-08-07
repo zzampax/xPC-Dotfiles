@@ -1,0 +1,75 @@
+#!/bin/bash
+
+# This script is used to copy the correct dotfiles to the user's dotfiles directory
+# The dotfiles are stored in the $XDG_CONFIG_HOME directory or in the $HOME/.config directory
+
+# GIT structure
+# .
+#├── backup
+#├── restore
+#└── src
+#    ├── OLD
+#    │   ├── bash
+#    │   ├── code-settings.json
+#    │   ├── wofi
+#    │   └── wofi.old
+#    └── <PC_NAME>
+#        ├── fish
+#        ├── hypr
+#        ├── kitty
+#        ├── nvim
+#        ├── tofi
+#        ├── waybar
+#        └── zed
+
+# check if src/ has /etc/hostname of the current machine
+# if not, exit the script
+# if yes, check diffs between the current dotfiles and the dotfiles in the src/ directory 
+# if there are differences, ask the user if they want to overwrite the dotfiles
+# if yes, overwrite the dotfiles
+# if no, skip to the next dotfile
+
+PC_NAME=$(cat /etc/hostname)
+
+# check if the directory exists
+if [ ! -d src/$PC_NAME ]; then
+    echo "The $PC_NAME directory does not exist"
+    exit 1
+fi
+
+# copy the dotfiles to the correct directory
+# Note that the dotfiles should only be fish, hypr, kitty, nvim, tofi, waybar, zed
+# The dotfiles should be stored in the $XDG_CONFIG_HOME directory or in the $HOME/.config directory
+
+for dotfile in fish hypr kitty nvim tofi waybar zed
+do
+    if [ -d $HOME/.config/$dotfile ]; then
+	echo "The $dotfile directory already exists"
+	echo "Do you want to overwrite the $dotfile directory? (y/N/d)"
+	echo "d: diff the $dotfile directory"
+	read -r answer
+	if [ "$answer" == "y" ]; then
+	    rm -rf $HOME/.config/$dotfile
+	    cp -r src/$PC_NAME/$dotfile $HOME/.config
+	elif [ "$answer" == "d" ]; then
+	    diff -r $HOME/.config/$dotfile src/$PC_NAME/$dotfile
+	    echo "Do you want to overwrite the $dotfile directory? (y/N)"
+	    read -r answer
+	    if [ "$answer" == "y" ]; then
+		rm -rf $HOME/.config/$dotfile
+		cp -r src/$PC_NAME/$dotfile $HOME/.config
+	    else
+		echo "The $dotfile directory will not be overwritten"
+	    fi
+	else
+	    echo "The $dotfile directory will not be overwritten"
+	fi
+    else
+	cp -r src/$PC_NAME/$dotfile $HOME/.config
+    fi
+done
+
+echo "The dotfiles have been copied to the correct directory"
+tree -L 2 $HOME/.config
+
+exit 0

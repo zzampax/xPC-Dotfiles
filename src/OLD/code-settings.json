@@ -1,0 +1,16 @@
+{
+    "files.autoSave": "afterDelay",
+    "window.titleBarStyle": "custom",
+    "editor.fontFamily": "'JetBrains Mono'",
+    "editor.fontWeight": "bold",
+    "editor.fontSize": 13,
+    "editor.minimap.enabled": false,
+    "workbench.colorTheme": "Catppuccin Mocha",
+    "catppuccin.accentColor": "mauve",
+    "catppuccin.workbenchMode": "minimal",
+    "catppuccin.colorOverrides": {
+        "mocha": {
+            "base": "#11111b"
+        }
+    },
+}

@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# This script is used to backup the correct dotfiles to the remote git repository
+# The dotfiles are stored in the $XDG_CONFIG_HOME directory or in the $HOME/.config directory
+
+# GIT structure
+# .
+#├── backup
+#├── restore
+#└── src
+#    ├── OLD
+#    │   ├── bash
+#    │   ├── code-settings.json
+#    │   ├── wofi
+#    │   └── wofi.old
+#    └── <PC_NAME>
+#        ├── fish
+#        ├── hypr
+#        ├── kitty
+#        ├── nvim
+#        ├── tofi
+#        ├── waybar
+#        └── zed
+
+# check if src/ has /etc/hostname of the current machine
+# if not, create a new directory with the hostname of the current machine
+# if yes, use the directory with the hostname of the current machine
+
+PC_NAME=$(cat /etc/hostname)
+
+# check if the directory exists
+if [ ! -d src/$PC_NAME ]; then
+    echo "Creating a new directory for the current machine"
+    mkdir src/$PC_NAME
+fi
+
+# copy the dotfiles to the correct directory
+# Note that the dotfiles should only be fish, hypr, kitty, nvim, tofi, waybar, zed
+# The dotfiles should be stored in the $XDG_CONFIG_HOME directory or in the $HOME/.config directory
+
+for dotfile in fish hypr kitty nvim tofi waybar zed
+do
+    if [ -d $XDG_CONFIG_HOME/$dotfile ]; then
+	cp -r $XDG_CONFIG_HOME/$dotfile ./src/$PC_NAME/
+    elif [ -d $HOME/.config/$dotfile ]; then
+	cp -r $HOME/.config/$dotfile ./src/$PC_NAME/
+    else
+	echo "The $dotfile directory does not exist"
+    fi
+done
+
+echo "The dotfiles have been copied to the correct directory"
+tree -L 2 src/$PC_NAME
+
+exit 0
