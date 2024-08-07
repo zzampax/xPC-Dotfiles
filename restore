@@ -5,22 +5,23 @@
 
 # GIT structure
 # .
-#├── backup
-#├── restore
-#└── src
-#    ├── OLD
-#    │   ├── bash
-#    │   ├── code-settings.json
-#    │   ├── wofi
-#    │   └── wofi.old
-#    └── <PC_NAME>
-#        ├── fish
-#        ├── hypr
-#        ├── kitty
-#        ├── nvim
-#        ├── tofi
-#        ├── waybar
-#        └── zed
+# ├── backup
+# ├── restore
+# └── src
+#     ├── OLD
+#     │   ├── bash
+#     │   ├── code-settings.json
+#     │   ├── wofi
+#     │   └── wofi.old
+#     └── <PC_NAME>
+#         ├── dunst
+#         ├── fish
+#         ├── hypr
+#         ├── kitty
+#         ├── nvim
+#         ├── tofi
+#         ├── waybar
+#         └── zed
 
 # check if src/ has /etc/hostname of the current machine
 # if not, exit the script
@@ -41,7 +42,7 @@ fi
 # Note that the dotfiles should only be fish, hypr, kitty, nvim, tofi, waybar, zed
 # The dotfiles should be stored in the $XDG_CONFIG_HOME directory or in the $HOME/.config directory
 
-for dotfile in fish hypr kitty nvim tofi waybar zed
+for dotfile in dunst fish hypr kitty nvim tofi waybar zed
 do
     if [ -d $HOME/.config/$dotfile ]; then
 	echo "The $dotfile directory already exists"
