@@ -1,0 +1,100 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+    // # Language server
+    // g d     Go to definition
+    // g D     Go to type definition
+    // g cmd-d Go to implementation
+    // c d     Rename (change definition)
+    // g A     Go to All references to the current word
+    //
+    // g s   Find symbol in current file
+    // g S   Find symbol in entire project
+    //
+    // g ]   Go to next diagnostic
+    // g [   Go to previous diagnostic
+    // ] d   Go to next diagnostic
+    // [ d   Go to previous diagnostic
+    // g h   Show inline error (hover)
+    // g .   Open the code actions menu
+    //
+    // # Git
+    // ] c   Go to next git change
+    // [ c   Go to previous git change
+    //
+    // # Treesitter
+    // ] x   Select a smaller syntax node
+    // [ x   Select a larger syntax node
+    //
+    // # Multi cursor
+    // g l   Add a visual selection for the next copy of the current word
+    // g L   The same, but backwards
+    // g >   Skip latest word selection, and add next.
+    // g <   The same, but backwards
+    // g a   Add a visual selection for every copy of the current word
+    //
+    // # Pane management
+    // g /        Open a project-wide search
+    // g <space>  Open the current search excerpt
+    // <ctrl-w> <space>  Open the current search excerpt in a split
+    // <ctrl-w> g d      Go to definition in a split
+    // <ctrl-w> g D      Go to type definition in a split
+    //
+    // # Insert mode
+    // i a / a a      Select the function argument the cursor is in
+    // ctrl-x ctrl-o  Open the completion menu
+    // ctrl-x ctrl-c  Request GitHub Copilot suggestion (if configured)
+    // ctrl-x ctrl-a  Open the inline AI assistant (if configured)
+    // ctrl-x ctrl-l  Open the code actions menu
+    // ctrl-x ctrl-z  Hides all suggestions
+    //
+    // # Ex commands
+    // :E[xplore]    Open the project panel
+    // :C[ollab]     Open the collaboration panel
+    // :Ch[at]       Open the chat panel
+    // :A[I]         Open the AI panel
+    // :No[tif]      Open the notifications panel
+    // :fe[edback]   Open the feedback window
+    // :cl[ist]      Open the diagnostics window
+    // :te[rm]       Open the terminal
+    // :Ext[ensions] Open the extensions window
+    "mode": "dark",
+    "vim_mode": true,
+    "base_keymap": "VSCode",
+    "telemetry": {
+        "diagnostics": false,
+        "metrics": false
+    },
+    "ui_font_size": 14,
+    "buffer_font_size": 12,
+    "buffer_font_family": "JetBrains Mono NL",
+    "theme": {
+        "mode": "system",
+        "light": "Catppuccin Mocha",
+        "dark": "One Dark"
+    },
+    // "autosave": {
+    //     "after_delay": {
+    //         "milliseconds": 1000
+    //     }
+    // },
+    "tab_size": 4,
+    "terminal": {
+        "detect_venv": {
+            "on": {
+                // Default directories to search for virtual environments, relative
+                // to the current working directory. We recommend overriding this
+                // in your project's settings, rather than globally.
+                "directories": [".env", "env", ".venv", "venv"],
+                // Can also be 'csh', 'fish', and `nushell`
+                "activate_script": "fish"
+            }
+        }
+    }
+}
