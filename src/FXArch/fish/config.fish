@@ -22,7 +22,6 @@ alias ll='ls -l'
 alias l='ls -lA'
 alias ip='ip -c'
 alias fetch='clear && fastfetch'
-alias pretty='clear;fastfetch;echo -e "\n\033[38;2;180;190;254m------------------------------------------------------------------------------------------\033[0m\n";ll ~;echo -e "\n\033[38;2;180;190;254m------------------------------------------------------------------------------------------\033[0m\n";ip a;echo -e "\n"'
 alias sys='fastfetch'
 alias localvenv='source .venv/bin/activate.fish'
 
