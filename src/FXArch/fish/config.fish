@@ -24,7 +24,3 @@ alias ip='ip -c'
 alias fetch='clear && fastfetch'
 alias sys='fastfetch'
 alias localvenv='source .venv/bin/activate.fish'
-
-if [ "$ZED_TERMINAL" = "1" ];
-	fastfetch -c screenfetch.jsonc -l small
-end
