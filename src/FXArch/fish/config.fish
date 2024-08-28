@@ -18,6 +18,7 @@ end
 
 # Aliases
 alias g='git'
+alias ls='ls --group-directories-first --color=auto'
 alias ll='ls -l'
 alias l='ls -lA'
 alias ip='ip -c'
