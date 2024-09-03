@@ -14,25 +14,25 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
--- 
+--
 -- ########################
 -- # PLUGINS INSTALLATION #
 -- ########################
 --
-require("lazy").setup({ "catppuccin/nvim", "goolord/alpha-nvim", "github/copilot.vim", "meatballs/notebook.nvim" })
--- 
+require("lazy").setup({ "catppuccin/nvim", "github/copilot.vim", "meatballs/notebook.nvim" })
+--
 -- #################
 -- # JUPYTER SETUP #
 -- #################
 --
-require('notebook').setup()
--- 
+require("notebook").setup()
+--
 -- ###############
 -- # THEME SETUP #
 -- ###############
 --
 require("catppuccin").setup({
-    flavour = "mocha", 
+    flavour = "mocha",
     background = {
         light = "latte",
         dark = "mocha",
@@ -77,38 +77,12 @@ require("catppuccin").setup({
         },
     },
 })
--- 
--- ###################
--- # DASHBOARD SETUP #
--- ###################
 --
-local alpha = require('alpha')
-local dashboard = require('alpha.themes.dashboard')
-dashboard.section.header.val = {
-  "                                   ",
-  "   ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣿⣶⣿⣦⣼⣆          ",
-  "    ⠉⠻⢿⣿⠿⣿⣿⣶⣦⠤⠄⡠⢾⣿⣿⡿⠋⠉⠉⠻⣿⣿⡛⣦       ",
-  "          ⠈⢿⣿⣟⠦ ⣾⣿⣿⣷    ⠻⠿⢿⣿⣧⣄     ",
-  "           ⣸⣿⣿⢧ ⢻⠻⣿⣿⣷⣄⣀⠄⠢⣀⡀⠈⠙⠿⠄    ",
-  "          ⢠⣿⣿⣿⠈    ⣻⣿⣿⣿⣿⣿⣿⣿⣛⣳⣤⣀⣀   ",
-  "   ⢠⣧⣶⣥⡤⢄ ⣸⣿⣿⠘  ⢀⣴⣿⣿⡿⠛⣿⣿⣧⠈⢿⠿⠟⠛⠻⠿⠄  ",
-  "  ⣰⣿⣿⠛⠻⣿⣿⡦⢹⣿⣷   ⢊⣿⣿⡏  ⢸⣿⣿⡇ ⢀⣠⣄⣾⠄   ",
-  " ⣠⣿⠿⠛ ⢀⣿⣿⣷⠘⢿⣿⣦⡀ ⢸⢿⣿⣿⣄ ⣸⣿⣿⡇⣪⣿⡿⠿⣿⣷⡄  ",
-  " ⠙⠃   ⣼⣿⡟  ⠈⠻⣿⣿⣦⣌⡇⠻⣿⣿⣷⣿⣿⣿ ⣿⣿⡇ ⠛⠻⢷⣄ ",
-  "      ⢻⣿⣿⣄   ⠈⠻⣿⣿⣿⣷⣿⣿⣿⣿⣿⡟ ⠫⢿⣿⡆     ",
-  "       ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃     ",
-}
-dashboard.section.buttons.val = {
-  dashboard.button("n", "New File", ":enew<CR>"),
-  dashboard.button("e", "Open File", ":e "),
-  dashboard.button("q", "Quit", ":qa<CR>"),
-}
-alpha.setup(dashboard.config)
--- 
 -- #############
 -- # VIM SETUP #
 -- #############
--- 
+--
+vim.opt.conceallevel = 1
 vim.opt.clipboard = "unnamedplus"
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4

@@ -15,6 +15,10 @@ end
 if test -d ~/.local/bin
     set -gx PATH ~/.local/bin $PATH
 end
+# If local/appimage not empty, add to path
+if test -d ~/.local/appimage
+    set -gx PATH ~/.local/appimage $PATH
+end
 
 # Aliases
 alias g='git'
@@ -24,6 +28,9 @@ alias ip='ip -c'
 alias fetch='clear && fastfetch'
 alias vim='nvim'
 alias localvenv='source .venv/bin/activate.fish'
+
+# Remove the bind clear-screen
+bind \cl ''
 
 if [ "$ZED_TERMINAL" = "1" ];
 	fastfetch -c screenfetch.jsonc -l small

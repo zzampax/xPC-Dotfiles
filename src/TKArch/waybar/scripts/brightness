@@ -5,7 +5,7 @@ iDIR="$HOME/.config/waybar/icons"
 # Get brightness
 get_backlight() {
 	LIGHT=$(printf "%.0f\n" $(brightnessctl i))
-	echo "${LIGHT}%"
+    echo "$LIGHT"
 }
 
 # Get icons
@@ -27,7 +27,7 @@ get_icon() {
 
 # Notify
 notify_user() {
-	notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "" "Brightness : $(brightnessctl g)"
+    notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "" "Brightness : $(brightnessctl -m | tr "," "\n" | tail -n 2 | head -n 1) ($(brightnessctl g))" -t 1000
 }
 
 # Increase brightness
@@ -37,7 +37,10 @@ inc_backlight() {
 
 # Decrease brightness
 dec_backlight() {
-	brightnessctl set 10%- && get_icon && notify_user
+    # If brightness is bigger than 341, let it decrease by 5%
+    if [[ "$(brightnessctl g)" -gt "341" ]]; then
+        brightnessctl set 5%- && get_icon && notify_user
+    fi
 }
 
 # Execute accordingly
