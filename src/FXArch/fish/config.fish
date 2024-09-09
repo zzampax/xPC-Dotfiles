@@ -15,6 +15,12 @@ end
 if test -d ~/.local/bin
     set -gx PATH ~/.local/bin $PATH
 end
+# If local/appimage not empty, add to path  
+if test -d ~/.local/appimage
+    set -gx PATH ~/.local/appimage $PATH
+end
+
+bind \cl ''
 
 # Aliases
 alias g='git'

@@ -82,7 +82,7 @@ require("obsidian").setup({
       opts = { noremap = false, expr = true, buffer = true },
     },
     -- Toggle check-boxes.
-    ["<leader>ch"] = {
+    ["ch"] = {
       action = function()
         return require("obsidian").util.toggle_checkbox()
       end,
@@ -352,7 +352,7 @@ require("notebook").setup()
 -- ###############
 -- # THEME SETUP #
 -- ###############
---
+-- 
 require("catppuccin").setup({
     flavour = "mocha", 
     background = {
@@ -368,7 +368,7 @@ require("catppuccin").setup({
         percentage = 0.15,
     },
     no_italic = false,
-    no_bold = true,
+    no_bold = false,
     no_underline = false,
     styles = {
         comments = { "italic" },
