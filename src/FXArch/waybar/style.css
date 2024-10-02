@@ -11,7 +11,7 @@
 window#waybar {
     border-radius: 10px;
     background: rgba(30, 30, 46, 0.65);
-    color: #cdd6f4;
+    color: @text;
 }
 
 tooltip {
@@ -21,27 +21,23 @@ tooltip {
 
 #workspaces button {
     padding: 5px;
-    color: @surface1;
+    color: @text;
     margin-right: 5px;
 }
 
 #workspaces button.active {
-    color: #a6adc8;
+    color: @maroon;
 }
 
-#workspaces button.focused {
-    color: #a6adc8;
+#workspaces button.focused,
+#workspaces button:hover {
+    color: @text;
     background: #010409;
 }
 
 #workspaces button.urgent {
     color: #11111b;
-    background: #010409;
-}
-
-#workspaces button:hover {
-    background: #010409;
-    color: #cdd6f4;
+    background: @text;
 }
 
 #window,
@@ -83,51 +79,43 @@ tooltip {
 
 #clock {
     margin-left: 10px;
-    color: @lavender;
+    color: @red;
 }
 
 #network {
-    color: @mauve;
+    color: @maroon;
 }
 
 #bluetooth {
-    color: #89b4fa;
+    color: @red;
     margin-right: 10px
 } 
 
 #pulseaudio {
-    color: #89b4fa;
+    color: @red;
 }
 
 #pulseaudio.microphone {
-    color: #cba6f7;
+    color: @maroon;
     margin-right: 10px;
 }
 
 #battery {
-    color: #a6e3a1;
+    color: @red;
     margin-right: 10px;
 }
 
 #memory {
-    color: @mauve;
+    color: @maroon;
     margin-right: 10px;
 }
 
 #cpu {
-    color: @mauve;
+    color: @maroon;
     margin-right: 10px;
 }
 
 #disk {
-    color: @mauve;
+    color: @maroon;
     margin-right: 10px;
-}
-
-#custom-cava.Playing {
-    color: @lavender;
-}
-
-#custom-cava.Paused,
-#custom-cava.Stopped {
 }
