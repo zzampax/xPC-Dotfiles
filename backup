@@ -52,5 +52,8 @@ done
 
 echo "The dotfiles have been copied to the correct directory"
 tree -L 2 src/$PC_NAME
+echo "The following files have changed:"
+git diff --name-only
+echo -e "\n"
 
 exit 0
