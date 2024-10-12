@@ -15,6 +15,7 @@
 #     │   └── wofi.old
 #     └── <PC_NAME>
 #         ├── dunst
+#         ├── fastfetch
 #         ├── fish
 #         ├── hypr
 #         ├── kitty
@@ -39,7 +40,7 @@ fi
 # Note that the dotfiles should only be fish, hypr, kitty, nvim, tofi, waybar, zed
 # The dotfiles should be stored in the $XDG_CONFIG_HOME directory or in the $HOME/.config directory
 
-for dotfile in dunst fish hypr kitty nvim tofi waybar zed
+for dotfile in dunst fish hypr kitty nvim tofi waybar zed fastfetch
 do
     if [ -d $XDG_CONFIG_HOME/$dotfile ]; then
 	cp -r $XDG_CONFIG_HOME/$dotfile ./src/$PC_NAME/
