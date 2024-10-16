@@ -53,7 +53,10 @@ done
 
 # copy eventual custom binaries and scripts
 if [ -d $HOME/.local/bin ]; then
-    cp -r $HOME/.local/bin ./src/$PC_NAME/scripts
+	for script in $(ls $HOME/.local/bin)
+	do
+		cp $HOME/.local/bin/$script ./src/$PC_NAME/scripts/
+	done
 fi
 
 echo "The dotfiles have been copied to the correct directory"
