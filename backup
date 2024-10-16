@@ -51,6 +51,11 @@ do
     fi
 done
 
+# copy eventual custom binaries and scripts
+if [ -d $HOME/.local/bin ]; then
+    cp -r $HOME/.local/bin ./src/$PC_NAME/scripts
+fi
+
 echo "The dotfiles have been copied to the correct directory"
 tree -L 2 src/$PC_NAME
 echo "The following files have changed:"

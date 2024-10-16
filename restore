@@ -71,6 +71,14 @@ do
     fi
 done
 
+# copy eventual custom binaries and scripts
+if [ -d ./src/$PC_NAME/scripts ]; then
+	for script in $(ls ./src/$PC_NAME/scripts)
+	do
+		cp ./src/$PC_NAME/scripts/$script $HOME/.local/bin
+	done
+fi
+
 echo "The dotfiles have been copied to the correct directory"
 tree -L 2 $HOME/.config
 
