@@ -1,0 +1,200 @@
+#!/bin/python3.12
+import os
+import subprocess
+import sys
+import json
+import random
+
+def handle_hyprland_config(theme):
+    # Find col.active_border = rgba(xxxee) rgba(xxxee) 45deg
+    # Replace with col.active_border = rgba(theme["hyprland"][0]) rgba(theme["hyprland"][1]) 45deg
+
+    with open(f"{os.getenv('HOME')}/.config/hypr/hyprland.conf", "r") as f:
+        lines = f.readlines()
+
+    for i in range(len(lines)):
+        if "col.active_border" in lines[i]:
+            lines[i] = f"\tcol.active_border = {theme['hyprland'][0]} {theme['hyprland'][1]} 45deg\n"
+            break
+
+    with open(f"{os.getenv('HOME')}/.config/hypr/hyprland.conf", "w") as f:
+    #with open("./test/hyprland.conf", "w") as f:
+        f.writelines(lines) 
+    return
+def handle_gtk_theme(theme):
+    # run gsettings set org.gnome.desktop.interface gtk-theme theme["gtk"]
+    subprocess.run(["gsettings", "set", "org.gnome.desktop.interface", "gtk-theme", theme["gtk"]])
+    # reset cursor
+    subprocess.run(["gsettings", "set", "org.gnome.desktop.interface", "cursor-theme", "'Adwaita'"])
+    return
+
+def handle_waybar_config(theme, old_theme):
+    # edit .config/waybar/style.css
+    # Replace every occurence of current_theme with theme
+    with open(f"{os.getenv('HOME')}/.config/waybar/style.css", "r") as f:
+        lines = f.readlines()
+    for i in range(len(lines)):
+        if old_theme['waybar'][0] in lines[i]:
+            lines[i] = lines[i].replace(old_theme['waybar'][0], theme['waybar'][0])
+        elif old_theme['waybar'][1] in lines[i]:
+            lines[i] = lines[i].replace(old_theme['waybar'][1], theme['waybar'][1])
+    with open(f"{os.getenv('HOME')}/.config/waybar/style.css", "w") as f:
+    #with open("./test/waybar.css", "w") as f:
+        f.writelines(lines)
+
+    # Restart waybar
+    subprocess.run(["killall", "waybar"])
+    _waybar_process = subprocess.Popen(['waybar'], start_new_session=True, stdout=subprocess.DEVNULL)
+    return
+
+def handle_fish_shell(theme):
+    # edit .config/fish/config.fish
+    # \techo -n (printf '\033[38;2;x;x;xm') replace with \techo -n (printf 'theme["fish"]')
+    with open(f"{os.getenv('HOME')}/.config/fish/config.fish", "r") as f:
+        lines = f.readlines()
+    for i in range(len(lines)):
+        if "echo -n (printf '\\033[38;2;" in lines[i]:
+            lines[i] = f"\techo -n (printf '{theme['fish']}')\n"
+    with open(f"{os.getenv('HOME')}/.config/fish/config.fish", "w") as f:
+    #with open("./test/fish.fish", "w") as f:
+        f.writelines(lines)
+    return
+
+def handle_tofi_config(theme):
+    # edit .config/tofi/config
+    # Replace selection-color = #xxxxxx with selection-color = theme["tofi"]
+    with open(f"{os.getenv('HOME')}/.config/tofi/config", "r") as f:
+        lines = f.readlines()
+    for i in range(len(lines)):
+        if "selection-color" in lines[i]:
+            lines[i] = f"selection-color = {theme['tofi']}\n"
+    with open(f"{os.getenv('HOME')}/.config/tofi/config", "w") as f:
+    #with open("./test/tofi.config", "w") as f:
+        f.writelines(lines)
+    return
+
+def handle_vscode_config(theme):
+    # edit .config/Code/User/settings.json
+    # Replace "catppuccin.accentColor": "x" with "catppuccin.accentColor": "theme["vscode"]"
+    try:
+        with open(f"{os.getenv('HOME')}/.config/Code/User/settings.json", "r") as f:
+            jsonDump = json.loads(f.read())
+        jsonDump["catppuccin.accentColor"] = theme["code"]
+        with open(f"{os.getenv('HOME')}/.config/Code/User/settings.json", "w") as f:
+        #with open("./test/vscode.json", "w") as f:
+            f.write(json.dumps(jsonDump, indent=4))
+    except json.decoder.JSONDecodeError:
+        # Probably has a comma at the end of the file
+        with open(f"{os.getenv('HOME')}/.config/Code/User/settings.json", "r") as f:
+            lines = f.readlines()
+        for i in range(len(lines)):
+            if "catppuccin.accentColor" in lines[i]:
+                lines[i] = f"\t\"catppuccin.accentColor\": \"{theme['code']}\"\n"
+        with open(f"{os.getenv('HOME')}/.config/Code/User/settings.json", "w") as f:
+        #with open("./test/vscode.json", "w") as f:
+            f.writelines(lines)
+    return
+
+def handle_wallpaper(theme, img):
+    # Set wallpaper
+    # Wallpapers are in ~/Pictures/
+    # Wallpapers are organized in 4 folders: R, G, B and X
+    # R, G, B are for red, green and blue wallpapers
+    # X is for wallpapers that don't fit in any of the above categories
+    # The wallpaper is chosen randomly from the folder that corresponds to the theme unless an image is provided
+    # If -r or --random is provided, the wallpaper is chosen randomly from the X folder
+
+    if img['rnd']:
+        img['path'] = random.choice(os.listdir(f"{os.getenv('HOME')}/Pictures/X"))
+    elif img['path'] == '':
+        if os.listdir(f"{os.getenv('HOME')}/Pictures/{theme['wallpaper']}") != []:
+            img['path'] = random.choice(os.listdir(f"{os.getenv('HOME')}/Pictures/{theme['wallpaper']}"))
+            img['path'] = f"{os.getenv('HOME')}/Pictures/{theme['wallpaper']}/{img['path']}"
+
+    # Check for unsafe input (../) or RCE
+    if not os.path.isabs(img['path']):
+        print("The path must be absolute.")
+        sys.exit(1)
+    
+    # Check if the file exists
+    if not os.path.exists(img['path']):
+        print("The file does not exist.")
+        sys.exit(1)
+    
+    # Check if it's a file, not a directory
+    if not os.path.isfile(img['path']):
+        print("The path must be a file.")
+        sys.exit(1)
+
+    # Set wallpaper
+    subprocess.run(["swww", "img", img['path'], "--transition-type", "wipe", "--transition-fps", "144"], shell=False, check=True) # WARNING: KEEP shell=False
+    #print(f"swww img {img['path']}")
+    return
+
+def main():
+    img = { 'path': '', 'rnd': False }
+    if len(sys.argv) == 2:
+        if sys.argv[1] == "--gen":
+            print("Generating themes.json")
+            if not os.path.exists(f"{os.getenv('HOME')}/.local/share/themeswitcher"):
+                os.makedirs(f"{os.getenv('HOME')}/.local/share/themeswitcher")
+            subprocess.run(["curl", "https://raw.githubusercontent.com/zzampax/Catppuccin-Hyprland-ThemeSwitcher/main/themes.json", "-o", f"{os.getenv('HOME')}/.local/share/themeswitcher/themes.json"])
+            print("Done [in ~/.local/share/themeswitcher/themes.json]")
+        elif sys.argv[1] == "--help" or sys.argv[1] == "-h":
+            print("thmsw - Catppuccin ThemeSwitcher for Hyprland GNU/Linux")
+            print("Usage: themeswitcher [OPTION]")
+            print("Options:")
+            print("\t--gen    Generate themes.json")
+            print("\t--img=   Set wallpaper to image (provide absolute path)")
+            print("\t-r\n\t--random Set wallpaper to random image from the X folder")
+            print("\t-h\n\t--help   Display this help message")
+            sys.exit(0)
+        elif sys.argv[1].startswith("--img="):
+            img['path'] = sys.argv[1].split("=")[1]
+        elif sys.argv[1] == "--random":
+            img['rnd'] = True
+        else:
+            print("Invalid option, run themeswitcher --help for help")        
+            sys.exit(0)
+
+    # Load themes
+    try:
+        with open(f"{os.getenv('HOME')}/.local/share/themeswitcher/themes.json", "r") as f:
+            themes = json.load(f)
+    except FileNotFoundError:
+        print("No themes found in ~/.local/share/themeswitcher/themes.json, run themeswitcher --gen to generate themes.json")
+        sys.exit(1)
+
+    # Load current theme
+    try:
+        with open(f"{os.getenv('HOME')}/.local/share/themeswitcher/current.json", "r") as f:
+            current_theme = json.load(f)['current']
+    except FileNotFoundError:
+        current_theme = "lavenderMauve"
+    if current_theme not in themes:
+        print(f"Theme {current_theme} not found in themes.json")
+        os.remove(f"{os.getenv('HOME')}/.local/share/themeswitcher/current.json")
+        sys.exit(1)
+
+    keys = list(themes.keys())
+    prev_theme = keys[keys.index(current_theme) - 1] if keys.index(current_theme) - 1 >= 0 else keys[-1]
+    next_theme = keys[keys.index(current_theme) + 1] if keys.index(current_theme) + 1 < len(keys) else keys[0]
+
+    with open(f"{os.getenv('HOME')}/.local/share/themeswitcher/current.json", "w") as f:
+        json.dump({ "current": next_theme }, f)
+    print(f"Switching from {prev_theme} to {current_theme}, next in line is {next_theme}")
+
+    # Set theme
+    theme = themes[current_theme]
+    handle_hyprland_config(theme)
+    handle_gtk_theme(theme)
+    handle_waybar_config(theme, themes[prev_theme])
+    handle_fish_shell(theme)
+    handle_tofi_config(theme)
+    handle_vscode_config(theme)
+    handle_wallpaper(theme, img)
+
+    return
+
+if __name__ == "__main__":
+    main()

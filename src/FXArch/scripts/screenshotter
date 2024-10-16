@@ -1,0 +1,3 @@
+#!/bin/bash
+
+grim -g "$(slurp -d)" ~/Pictures/Screenshots/$(date +'%F__%H-%M-%S.png'); wl-copy < ~/Pictures/Screenshots/$(ls Pictures/Screenshots/ -Art | tail -n 1)

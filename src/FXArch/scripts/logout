@@ -1,0 +1,11 @@
+#!/bin/bash
+echo -e "\a"
+choice=$(echo -e "Yes, Logout of Hyprland\nNo, Keep the Session" | fzf --prompt="Logout? " --height=10)
+
+if [[ $choice == "Yes, Logout of Hyprland" ]]; then
+    # User confirmed logout
+    hyprctl dispatch exit
+else
+    # User canceled logout
+    notify-send -u low "(A) Hyprland Logout" "Logout Cancelled by $(whoami) at $(date +"%H:%M:%S")"
+fi

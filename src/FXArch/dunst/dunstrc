@@ -335,7 +335,7 @@
     # Otherwise the "#" and following would be interpreted as a comment.
     background = "#1e1e2e"
     foreground = "#cdd6f4"
-    timeout = 10
+    timeout = 3
     # Icon for notifications with low urgency, uncomment to enable
     #default_icon = /path/to/icon
 
@@ -343,7 +343,7 @@
     background = "#1e1e2e"
     foreground = "#f9e2af"
     frame_color = "#f9e2af"
-    timeout = 10
+    timeout = 5
     override_pause_level = 30
     # Icon for notifications with normal urgency, uncomment to enable
     #default_icon = /path/to/icon
