@@ -86,6 +86,9 @@ require("catppuccin").setup({
 -- # VIM SETUP #
 -- #############
 --
+vim.api.nvim_create_user_command("Cfr", function()
+  vim.cmd("%!clang-format")
+end, {})
 vim.opt.conceallevel = 1
 vim.opt.clipboard = "unnamedplus"
 vim.opt.tabstop = 4
