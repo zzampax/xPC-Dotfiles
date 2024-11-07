@@ -1,0 +1,8 @@
+[
+    {
+        "context": "Terminal",
+        "bindings": {
+            "ctrl-w": "terminal_panel::ToggleFocus"
+        }
+    }
+]

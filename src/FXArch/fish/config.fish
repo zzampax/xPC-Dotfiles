@@ -33,6 +33,10 @@ function ssh
     end
 end
 
+if test -n "$ZED_TERMINAL"
+    ls -lA
+end
+
 # Aliases
 alias g='git'
 alias gback='git commit -m "Backup $(date +"%Y-%m-%d %H:%M:%S")"'
@@ -42,5 +46,4 @@ alias l='ls -lA'
 alias ip='ip -c'
 alias tree='tree -C --dirsfirst'
 alias fetch='clear && fastfetch'
-alias sys='fastfetch'
 alias localvenv='source .venv/bin/activate.fish'

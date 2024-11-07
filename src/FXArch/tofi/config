@@ -6,6 +6,7 @@ padding-left = 33%
 padding-top = 33%
 result-spacing = 25
 num-results = 7
+fuzzy-match = true
 
 font = JetBrainsMono Nerd Font Bold
 font-size = 12

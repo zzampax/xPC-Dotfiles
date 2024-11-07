@@ -64,6 +64,13 @@
     // :cl[ist]      Open the diagnostics window
     // :te[rm]       Open the terminal
     // :Ext[ensions] Open the extensions window
+    "assistant": {
+        "default_model": {
+            "provider": "copilot_chat",
+            "model": "gpt-4o"
+        },
+        "version": "2"
+    },
     "mode": "dark",
     "vim_mode": true,
     "base_keymap": "VSCode",
@@ -72,13 +79,10 @@
         "metrics": false
     },
     "ui_font_size": 13,
-    "buffer_font_size": 11,
+    "buffer_font_size": 12,
     "buffer_font_family": "JetBrains Mono NL",
-    "theme": {
-        "mode": "system",
-        "light": "Catppuccin Mocha",
-        "dark": "One Dark"
-    },
+    "buffer_font_weight": 700,
+    "theme": "Catppuccin Mocha",
     // "autosave": {
     //     "after_delay": {
     //         "milliseconds": 1000

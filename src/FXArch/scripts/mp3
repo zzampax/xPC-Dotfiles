@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# This script will handle mp3 folders/files and play them with VLC
+# If no argument is given, it will exit
+# If the argument is a folder, it will play all mp3 files in that folder (only one level deep and only mp3 files)
+# If the argument is a file, it will play that file (if it is an mp3 file)
+
+# Check if an argument was given
+if [ -z "$1" ]; then
+    echo "No argument given"
+    exit 1
+fi
+
+# Check if the argument is a folder
+if [ -d "$1" ]; then
+    # Check if the folder has any mp3 files
+    if [ -z "$(find "$1" -maxdepth 1 -type f -name "*.mp3")" ]; then
+        echo "No mp3 files found in $1"
+        exit 1
+    fi
+    # Play all mp3 files in the folder
+    vlc --qt-start-minimized "$1" >/dev/null 2>&1 & disown
+    echo "Playing all mp3 files in $1"
+    exit 0
+fi
+
+# Check if the argument is a file
+if [ -f "$1" ]; then
+    # Check if the file is an mp3 file
+    if [ -z "$(file "$1" | grep "MPEG ADTS")" ]; then
+        echo "$1 is not an mp3 file"
+        exit 1
+    fi
+    # Play the mp3 file
+    vlc --qt-start-minimized "$1" >/dev/null 2>&1 & disown
+    echo "Playing $1"
+    exit 0
+fi
+
+# If the argument is not a folder or a file
+echo "$1 is not a folder or a file"
+exit 1

@@ -1,0 +1,9 @@
+#!/bin/bash
+# This script is a wrapper around pass that uses tofi to fuzzy search for a password
+
+selected=$(find "$HOME/.password-store/" -name "*.gpg" | sed -e "s|$HOME/.password-store/||g" -e "s|.gpg||g" | tofi --prompt-text "[PASS]: " --fuzzy-match true)
+if [ -z "$selected" ]; then
+    exit 0
+fi
+
+pass show $selected -c
