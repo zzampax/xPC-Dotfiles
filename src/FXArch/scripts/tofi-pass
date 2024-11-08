@@ -7,3 +7,4 @@ if [ -z "$selected" ]; then
 fi
 
 pass show $selected -c
+notify-send -u normal "Password Store" "Copied $selected to clipboard.\nWill clear in 45 seconds."
