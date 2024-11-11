@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# This script formats the output of `docker ps` in a more readable way.
+
+# Get docker ps output without headers
+containers=$(docker ps --format "{{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}")
+blue=$(tput setaf 4)
+green=$(tput setaf 2)
+reset=$(tput sgr0)
+
+# Iterate through each container and format output
+echo "$containers" | while IFS=$'\t' read -r id name image status ports
+do
+  # Print container details
+  printf "${blue}ID: ${green}%-20s\n${blue}NAME: ${green}%-25s\n${blue}IMG: ${green}%-35s\n${blue}STATUS: ${green}%-20s\n" "$id" "$name" "$image" "$status"
+
+  # Print each port on a new line
+  printf "${blue}PORTS:${reset}\n"
+  IFS=',' read -ra port_array <<< "$ports"
+  for port in "${port_array[@]}"; do
+      cleaned_port=$(echo "$port" | xargs)
+      printf "  -> ${green}%s${reset}\n" "$cleaned_port"
+  done
+
+  # Newline for readability between containers
+  echo ""
+done

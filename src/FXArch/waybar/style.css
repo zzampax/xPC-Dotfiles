@@ -26,7 +26,7 @@ tooltip {
 }
 
 #workspaces button.active {
-    color: @maroon;
+    color: @mauve;
 }
 
 #workspaces button.focused,
@@ -79,43 +79,43 @@ tooltip {
 
 #clock {
     margin-left: 10px;
-    color: @red;
+    color: @lavender;
 }
 
 #network {
-    color: @maroon;
+    color: @mauve;
 }
 
 #bluetooth {
-    color: @red;
+    color: @lavender;
     margin-right: 10px
 } 
 
 #pulseaudio {
-    color: @red;
+    color: @lavender;
 }
 
 #pulseaudio.microphone {
-    color: @maroon;
+    color: @mauve;
     margin-right: 10px;
 }
 
 #battery {
-    color: @red;
+    color: @lavender;
     margin-right: 10px;
 }
 
 #memory {
-    color: @maroon;
+    color: @mauve;
     margin-right: 10px;
 }
 
 #cpu {
-    color: @maroon;
+    color: @mauve;
     margin-right: 10px;
 }
 
 #disk {
-    color: @maroon;
+    color: @mauve;
     margin-right: 10px;
 }
