@@ -119,3 +119,7 @@ tooltip {
     color: @mauve;
     margin-right: 10px;
 }
+
+#custom-music {
+    color: @lavender;
+}

@@ -7,7 +7,7 @@
 background_image=$(swww query | cut -d ":" -f 5 | cut -d " " -f 2 | head -n 1)
 # Replace the background image in the configuration file positioned at ~/.config/hypr/hyprlock.conf
 notify-send "Hyprlock" "$background_image"
-sed -i "s|path = .*|path = $background_image|g" ~/.config/hypr/hyprlock.conf
+#sed -i "s|path = .*|path = $background_image|g" ~/.config/hypr/hyprlock.conf
 
 # Call the Hyprlock application
 hyprlock
