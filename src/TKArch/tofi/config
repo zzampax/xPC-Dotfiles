@@ -10,9 +10,10 @@ num-results = 7
 font = JetBrainsMono Nerd Font Bold
 font-size = 12
 
-text-color = #fab387
+text-color = #6c7086
 
 prompt-text = ">>> "
 
 background-color = #11111bee
-selection-color = #f9e2af
+selection-color = #a6e3a1
+

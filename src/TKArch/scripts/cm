@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# This script compiles a C or C++ program and runs it.
+stripped_name=$(echo $1 | cut -f 1 -d '.')
+
+if [[ $1 == *.c ]]; then
+    gcc -g -o $stripped_name.o $1
+    #./$stripped_name
+    #rm $stripped_name
+elif [[ $1 == *.cpp ]]; then
+    g++ -g -o $stripped_name.o $1
+    #./$stripped_name
+    #rm $stripped_name
+else
+    echo "File must be a C or C++ source file."
+fi 

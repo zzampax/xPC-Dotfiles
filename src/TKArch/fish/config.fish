@@ -4,7 +4,7 @@ end
 set fish_greeting
 function fish_prompt
     # Start with normal color
-    echo -n (printf '\033[38;2;249;226;175m')
+	echo -n (printf '\033[38;2;166;227;161m')
     # Print the user@host:pwd$ prompt
     echo -n "["(whoami)"@"(cat /etc/hostname)":"(prompt_pwd)"\$] "
     # Reset the color
@@ -25,6 +25,7 @@ alias g='git'
 alias ll='ls -l'
 alias l='ls -lA'
 alias ip='ip -c'
+alias tree='tree -C --dirsfirst'
 alias fetch='clear && fastfetch'
 alias vim='nvim'
 alias localvenv='source .venv/bin/activate.fish'

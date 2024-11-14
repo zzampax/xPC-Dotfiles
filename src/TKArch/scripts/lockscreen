@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# This script is used to generate the update dinamically the background image of the configuration file of the Hyprlock application
+# The wallpaper will be fetched from the wallpaper engine API, in this case SWWW, and will be set as the background image of the configuration file
+# Finally, it will call the Hyprlock application
+
+background_image=$(swww query | cut -d ":" -f 5 | cut -d " " -f 2)
+# Replace the background image in the configuration file positioned at ~/.config/hypr/hyprlock.conf
+sed -i "s|path = .*|path = $background_image|g" ~/.config/hypr/hyprlock.conf
+
+# Call the Hyprlock application
+hyprlock

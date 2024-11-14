@@ -10,8 +10,8 @@
 
 window#waybar {
     border-radius: 10px;
-    background: rgba(30, 30, 46, 0.75);
-    color: #cdd6f4;
+    background: rgba(30, 30, 46, 0.65);
+    color: @text;
 }
 
 tooltip {
@@ -21,27 +21,23 @@ tooltip {
 
 #workspaces button {
     padding: 5px;
-    color: @surface1;
+    color: @text;
     margin-right: 5px;
 }
 
 #workspaces button.active {
-    color: #a6adc8;
+    color: @teal;
 }
 
-#workspaces button.focused {
-    color: #a6adc8;
+#workspaces button.focused,
+#workspaces button:hover {
+    color: @text;
     background: #010409;
 }
 
 #workspaces button.urgent {
     color: #11111b;
-    background: #010409;
-}
-
-#workspaces button:hover {
-    background: #010409;
-    color: #cdd6f4;
+    background: @text;
 }
 
 #window,
@@ -83,43 +79,43 @@ tooltip {
 
 #clock {
     margin-left: 10px;
-    color: @peach;
+    color: @green;
 }
 
 #network {
-    color: @yellow;
+    color: @teal;
 }
 
 #bluetooth {
-    color: #89b4fa;
-    margin-right: 10px;
-}
+    color: @green;
+    margin-right: 10px
+} 
 
 #pulseaudio {
-    color: #89b4fa;
+    color: @green;
 }
 
 #pulseaudio.microphone {
-    color: #cba6f7;
+    color: @teal;
     margin-right: 10px;
 }
 
 #battery {
-    color: #a6e3a1;
+    color: @green;
     margin-right: 10px;
 }
 
 #memory {
-    color: @yellow;
+    color: @teal;
     margin-right: 10px;
 }
 
 #cpu {
-    color: @yellow;
+    color: @teal;
     margin-right: 10px;
 }
 
 #disk {
-    color: @yellow;
+    color: @teal;
     margin-right: 10px;
 }
