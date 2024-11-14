@@ -53,6 +53,7 @@ done
 
 # copy eventual custom binaries and scripts
 if [ -d $HOME/.local/bin ]; then
+    mkdir ./src/$PC_NAME/scripts/
 	for script in $(ls $HOME/.local/bin)
 	do
 		cp $HOME/.local/bin/$script ./src/$PC_NAME/scripts/
