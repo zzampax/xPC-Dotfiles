@@ -47,6 +47,7 @@ alias l='ls -lA'
 alias ip='ip -c'
 alias tree='tree -C --dirsfirst'
 alias fetch='clear && fastfetch'
+alias pretty='kitty -o initial_window_height=450 -o initial_window_width=700 --class kittyFloat --hold fastfetch & disown'
 
 alias lvenv='source .venv/bin/activate.fish'
 alias kssh='kitten ssh'

@@ -103,5 +103,10 @@
         "env": {
             "ZED_TERMINAL": "1"
         }
+    },
+    "languages": {
+        "C": {
+            "format_on_save": "on"
+        }
     }
 }

@@ -24,7 +24,7 @@
         {
             "type": "custom",
             "format": "┌────────────────────── Hardware ──────────────────────┐",
-            "outputColor": "red"
+            "outputColor": "blue"
         },
         {
             "type": "title",
@@ -61,13 +61,13 @@
         {
             "type": "custom",
             "format": "└──────────────────────────────────────────────────────┘",
-            "outputColor": "red"
+            "outputColor": "blue"
         },
         "break",
         {
             "type": "custom",
             "format": "┌────────────────────── Software ──────────────────────┐",
-            "outputColor": "red"
+            "outputColor": "blue"
         },
         {
             "type": "os",
@@ -136,7 +136,7 @@
         {
             "type": "custom",
             "format": "└────────────────────────────────────────────────────┘",
-            "outputColor": "red"
+            "outputColor": "blue"
         },
         {
             "type": "custom",
