@@ -32,7 +32,6 @@ bind \cl ''
 #        command ssh $argv
 #    end
 #end
-
 if test -n "$ZED_TERMINAL"
     ls -lA
 end
@@ -43,6 +42,7 @@ alias g='git'
 alias ls='ls --group-directories-first --color=auto'
 alias ll='ls -l'
 alias l='ls -lA'
+alias vim='nvim'
 
 alias ip='ip -c'
 alias tree='tree -C --dirsfirst'
@@ -51,4 +51,3 @@ alias pretty='kitty -o initial_window_height=450 -o initial_window_width=700 --c
 
 alias lvenv='source .venv/bin/activate.fish'
 alias kssh='kitten ssh'
-
