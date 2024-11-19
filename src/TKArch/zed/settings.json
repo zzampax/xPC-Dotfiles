@@ -104,5 +104,10 @@
                 "activate_script": "fish"
             }
         }
+    },
+    "languages": {
+        "C": {
+            "format_on_save": "on"
+        }
     }
 }

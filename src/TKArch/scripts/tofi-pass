@@ -6,5 +6,6 @@ if [ -z "$selected" ]; then
     exit 0
 fi
 
-pass show $selected -c
-notify-send -u normal "Password Store" "Copied $selected to clipboard.\nWill clear in 45 seconds."
+if pass show "$selected" -c; then
+    notify-send -u normal "Password Store" "Copied $selected to clipboard.\nWill clear in 45 seconds."
+fi
