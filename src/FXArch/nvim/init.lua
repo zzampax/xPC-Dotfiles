@@ -26,7 +26,7 @@ require("lazy").setup({ "catppuccin/nvim", "nvim-lualine/lualine.nvim", "nvim-tr
 -- ###############
 -- 
 require("catppuccin").setup({
-    flavour = "mocha", 
+    flavour = "frappe", 
     background = {
         light = "latte",
         dark = "mocha",
