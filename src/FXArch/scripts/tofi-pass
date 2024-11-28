@@ -1,11 +1,13 @@
 #!/bin/bash
 # This script is a wrapper around pass that uses tofi to fuzzy search for a password
-# TODO: pass otp
 
 selected=$(find "$HOME/.password-store/" -name "*.gpg" | sed -e "s|$HOME/.password-store/||g" -e "s|.gpg||g" | sort | tofi --prompt-text "[PASS]: " --fuzzy-match true)
 if [ -z "$selected" ]; then
     exit 0
 fi
 
-pass show $selected -c
-notify-send -u normal "Password Store" "Copied $selected to clipboard.\nWill clear in 45 seconds."
+if pass otp show "$selected" -c;then
+    notify-send -u normal "Password Store" "Copied OTP code for $selected to clipboard.\nWill clear in 45 seconds."
+elif pass show "$selected" -c; then
+    notify-send -u normal "Password Store" "Copied $selected to clipboard.\nWill clear in 45 seconds."
+fi
