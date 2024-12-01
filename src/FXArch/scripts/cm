@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ -z "$1" ] && [ -f "Makefile" ]; then
+    make
+    exit 0
+fi
+
 # This script compiles a C or C++ program and runs it.
 stripped_name=$(echo $1 | cut -f 1 -d '.')
 
