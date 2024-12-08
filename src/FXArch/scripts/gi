@@ -1,0 +1,31 @@
+#!/bin/bash
+
+if ! gh --version 2>&1 >/dev/null;then
+    echo "Install github-cli utility"
+    exit 2
+fi
+
+current_directory=${PWD##*/}
+if [[ -z "$current_directory" ]];then
+    echo "Error getting the current directory"
+    exit 3
+fi
+
+if [[ -d ".git" ]];then
+    read -p "The directory is already a git repository, want to add remotes? [Y/n]" cont
+    cont=$(echo "$cont" | tr '[:upper:]' '[:lower:]')
+    if [[ "$cont" == "n" ]];then
+        exit 1
+    fi
+else
+    git init .
+fi
+
+if ping -c 1 git.zpx 2>&1 >/dev/null;then
+    git remote add origin git@git.zpx:/$current_directory.git
+    echo "Added git.zpx/$current_directory.git as origin"
+else
+    echo "Cannot reach git.zpx"
+fi
+
+gh repo create $current_directory --private --source=. --remote=upstream
