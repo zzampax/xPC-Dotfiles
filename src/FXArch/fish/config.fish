@@ -15,39 +15,34 @@ end
 if test -d ~/.local/bin
     set -gx PATH ~/.local/bin $PATH
 end
+
 # If local/appimage not empty, add to path  
 if test -d ~/.local/appimage
     set -gx PATH ~/.local/appimage $PATH
 end
 
+# Bind F9 to Right Arrow
+bind \e\[20\~ backward-char
+# Bind F10 to Left Arrow
+bind \e\[21\~ forward-char
+# Unbind Ctrl+L to Clear-Terminal (Kitty bug)
 bind \cl ''
 
-#function ssh
-#    # Check if we are in the kitty terminal
-#    if test "$TERM" = "xterm-kitty"
-#        # Connect via SSH and immediately start tmux on the remote machine
-#        command tmux new-session "ssh $argv; exit"
-#    else
-#        # Just run the regular ssh command if not in kitty
-#        command ssh $argv
-#    end
-#end
 if test -n "$ZED_TERMINAL"
     ls -lA
 end
 
-# Aliases
+# Utility Aliases
 alias g='git'
-#alias gback='git commit -m "Backup $(date +"%Y-%m-%d %H:%M:%S")"'
 alias ls='ls --group-directories-first --color=auto'
 alias ll='ls -l'
 alias l='ls -lA'
 alias vim='nvim'
-
+# Pretty Aliases
 alias ip='ip -c'
 alias tree='tree -C --dirsfirst'
 alias fetch='clear && fastfetch'
 alias pretty='kitty -o initial_window_height=450 -o initial_window_width=700 --class kittyFloat --hold fastfetch & disown'
-
+# Misc Aliases
 alias lvenv='source .venv/bin/activate.fish'
 alias kssh='kitten ssh'
