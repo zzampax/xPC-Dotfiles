@@ -1,0 +1,14 @@
+#!/bin/bash
+
+pass git fetch
+
+COMMITS_TO_PULL=$(pass git rev-list HEAD..soft/main --count)
+COMMITS_TO_PUSH=$(pass git rev-list soft/main..HEAD --count)
+
+if [ "$COMMITS_TO_PULL" -gt 0 ] && [ "$COMMITS_TO_PUSH" -eq 0 ]; then
+    pass git pull soft main
+elif [ "$COMMITS_TO_PULL" -eq 0 ] && [ "$COMMITS_TO_PUSH" -gt 0 ]; then
+    pass git push soft main
+elif [ "$COMMITS_TO_PULL" -gt 0 ] && [ "$COMMITS_TO_PUSH" -gt 0 ]; then
+    exit 1
+fi

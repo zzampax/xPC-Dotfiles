@@ -7,7 +7,7 @@
     "passthrough": false,
     "gtk-layer-shell": true,
     "height": 30,
-    "modules-left": ["clock", "disk", "cpu", "memory", "custom/music"],
+    "modules-left": ["clock", "disk", "cpu", "memory"],
     "modules-center": ["hyprland/workspaces"],
     "modules-right": [
         "network",
