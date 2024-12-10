@@ -1,0 +1,12 @@
+[Unit]
+Description=Git automation for Password-Store [Timer]
+
+[Timer]
+Unit=passgit.service
+OnBootSec=0
+OnUnitActiveSec=30s
+AccuracySec=1s
+
+[Install]
+WantedBy=timers.target
+

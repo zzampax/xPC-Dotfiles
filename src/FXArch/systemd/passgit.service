@@ -1,0 +1,5 @@
+[Unit]
+Description=Git automation for Password-Store
+
+[Service]
+ExecStart=/home/zpx/.local/bin/passgit
