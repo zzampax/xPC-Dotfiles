@@ -131,6 +131,12 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     vim.cmd("Cfr")
   end,
 })
+vim.api.nvim_create_autocmd("TermOpen", {
+  pattern = "*",
+  callback = function()
+    vim.cmd("startinsert") -- Automatically enter Terminal-Insert mode
+  end,
+})
 
 vim.opt.conceallevel = 1
 vim.opt.clipboard = "unnamedplus"
